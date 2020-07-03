@@ -1,0 +1,107 @@
+<div [@routerTransition]>
+  <div class="form-group">
+    <div style="color: red;">
+       <img  class="images" with="20" height="20" src="assets/images/live.gif"> 
+      LIVE </div>
+    <div class="i-am-centered"><h1>  Covid 19 stats {{countryName}} <img  class="images" class="images" with="20" height="20" src={{COVID_DATA.countryInfo.flag}}></h1></div>
+    
+  </div>
+  <div>
+      <form [formGroup]="countryForm" (ngSubmit)="onFormSubmit()">
+        <div class="row i-am-centered">
+        <mat-form-field>
+          <mat-label>Select Country</mat-label>
+          <mat-select formControlName="country" (selectionChange)="onCountryChange()">
+            <mat-option *ngFor="let country of COVID_DATA_ARRAY" [value]="country">
+              {{country.country}}  <img  class="images" with="10" height="10" src={{country.countryInfo.flag}}>
+            </mat-option>
+          </mat-select>
+        
+        </mat-form-field>
+
+
+        
+        <div class="row i-am-centered" style="width: 100%;">        
+          <div style="width: 33%">
+            <div class="card text-white bg-dark mb-3">
+                <div class="card-header">Recovery Rate</div>
+                <div class="card-body">
+                    <h4 class="card-title">{{recoveryRate}}%</h4>                   
+                </div>
+            </div>            
+        </div>        
+        <div style="width: 33%">
+                  <div class="card text-white bg-dark mb-3">
+                      <div class="card-header">Fatality Rate</div>
+                      <div class="card-body">
+                          <h4 class="card-title">{{fatalityRate}}%</h4>                         
+                      </div>
+              </div>
+            </div>
+            <div style="width: 33%">
+                <div class="card text-white bg-dark mb-3">
+                    <div class="card-header">Critical Cases</div>
+                    <div class="card-body">
+                        <h4 class="card-title">{{criticalCasesRate}}%</h4>                       
+                    </div>                   
+            </div>
+          </div>
+          </div>
+      </div>
+        </form>
+
+
+
+    </div>
+    <div class="form-group">
+      <table class="table table-dark table-hover">
+        <thead>
+           <tr>
+            
+              <th style="color:orangered">Total Cases</th>
+              <th style="color:orange">Active Cases</th>
+              <th style="color:lawngreen">Recovered Cases</th>
+              <th style="color: black">Deaths</th>
+             
+           </tr>
+        </thead>
+        <tbody>
+          <tr>
+            
+             <td style="color:orangered">{{totalCases}} </td>
+             <td style="color:orange">{{activeCases}} 
+              <!-- + {{COVID_DATA.todayCases}} new cases today -->
+            </td>
+             <td style="color:lawngreen">{{recoveredCases}}</td>
+             <td style="color:black">{{deathCases}}  
+              <!-- + {{COVID_DATA.todayDeaths}} deaths today  -->
+            </td>
+           
+             
+          </tr>
+       </tbody>
+    </table>
+         
+      </div>
+      
+<div class="chart-wrapper" *ngIf="pieChartData">
+    <canvas baseChart 
+    [data]="pieChartData" 
+    [labels]="pieChartLabels" 
+    [chartType]="pieChartType"
+    [options]="pieChartOptions"
+    [plugins]="pieChartPlugins"
+    [legend]="pieChartLegend">
+  </canvas>
+</div>
+
+
+
+     
+
+    </div>
+
+
+  
+        
+  

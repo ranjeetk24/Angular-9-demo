@@ -1,0 +1,30 @@
+<div [@routerTransition]>
+    <h1>Registered Uers</h1>
+    <table class="table table-dark table-hover">
+       <thead>
+          <tr>
+           
+             <th>First Name</th>
+             <th>Last Name</th>
+             <th>Email</th>
+             <th>Mobile Number</th>
+             <th>Action</th>
+          </tr>
+       </thead>
+       <tbody>
+          <tr *ngFor="let item of users" [attr.id]="item.id">
+            
+             <td>{{ item.firstName }}</td>
+             <td>{{ item.lastName }}</td>
+             <td>{{ item.email }}</td>
+             <td>{{ item.mobileNumber}}</td>
+           
+             <td>
+                <button type="button" >Edit</button>
+                <button type="button" (click)="deleteUser(item.id)">Delete</button>
+             </td>
+          </tr>
+       </tbody>
+    </table>
+ </div>
+
